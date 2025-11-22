@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KALEIXO - Tecnologias Emergentes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: #3c3c3c;
+            background-color: #0a0a0a;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(93, 78, 55, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(28, 28, 28, 0.9) 100%);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(93, 78, 55, 0.2);
+            color: #fefefe;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(28, 28, 28, 0.95) 100%);
+            border-bottom: 1px solid rgba(93, 78, 55, 0.4);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            position: relative;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon img:hover {
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.7)) brightness(1.1);
+            transform: scale(1.05);
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 200;
+            color: #d4af37;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: rgba(254, 254, 254, 0.8);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.95rem;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #8b7d6b);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 50%, #2d2d2d 100%);
+            color: #fefefe;
+            padding: 200px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(93, 78, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(139, 125, 107, 0.05) 0%, transparent 50%);
+            animation: gradientShift 10s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 3rem;
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.4));
+            transition: all 0.3s ease;
+        }
+
+        .hero-logo img:hover {
+            filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.6)) brightness(1.1);
+            transform: scale(1.05);
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #d4af37;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 300;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 100;
+            margin-bottom: 2.5rem;
+            letter-spacing: 12px;
+            color: #fefefe;
+            text-transform: uppercase;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 4rem;
+            color: rgba(254, 254, 254, 0.85);
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.9;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.8s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #b8941f);
+            color: #0a0a0a;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 400;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #fefefe;
+            border-color: #fefefe;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 140px 0;
+            position: relative;
+            margin: 0;
+        }
+
+        section:not(.hero) {
+            padding-top: 140px;
+            padding-bottom: 140px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.2rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            color: #d4af37;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(254, 254, 254, 0.7);
+            margin-bottom: 6rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #1c1c1c 0%, #0a0a0a 100%);
+            color: #fefefe;
+            padding-top: 140px;
+            margin-top: 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 2.2rem;
+            font-weight: 200;
+            margin-bottom: 2.5rem;
+            color: #d4af37;
+            letter-spacing: 1px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: rgba(254, 254, 254, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(139, 125, 107, 0.05) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(20px);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #8b7d6b);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 100;
+            color: #d4af37;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(254, 254, 254, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 100%);
+            color: #fefefe;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(28, 28, 28, 0.8) 100%);
+            backdrop-filter: blur(30px);
+            padding: 5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-header {
+            margin-bottom: 3.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.2rem;
+            border: 3px solid;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 125, 107, 0.1));
+            backdrop-filter: blur(20px);
+            transition: all 0.5s ease;
+        }
+
+        .agro-icon {
+            color: #8fbc8f;
+            border-color: #8fbc8f;
+        }
+
+        .health-icon {
+            color: #87ceeb;
+            border-color: #87ceeb;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            font-weight: 200;
+            color: #d4af37;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card p {
+            color: rgba(254, 254, 254, 0.8);
+            margin-bottom: 3.5rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            text-align: center;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-features {
+            list-style: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-features li {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            position: relative;
+            padding-left: 2.5rem;
+            color: rgba(254, 254, 254, 0.8);
+            font-weight: 300;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-features li:hover {
+            color: #d4af37;
+            padding-left: 3rem;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-features li:hover::before {
+            transform: translateX(5px);
+        }
+
+        /* Featured Projects Section */
+        .featured-projects {
+            background: linear-gradient(135deg, #1c1c1c 0%, #0a0a0a 100%);
+            color: #fefefe;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6rem;
+        }
+
+        .featured-card {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(28, 28, 28, 0.8));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            backdrop-filter: blur(30px);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .featured-header {
+            padding: 5rem;
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: #0a0a0a;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .featured-header h4 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+        }
+
+        .featured-body {
+            padding: 5rem;
+        }
+
+        .featured-body h5 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #d4af37;
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .featured-body p {
+            color: rgba(254, 254, 254, 0.8);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .featured-highlights {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .featured-highlights li {
+            padding: 1rem 0;
+            position: relative;
+            padding-left: 2.5rem;
+            color: rgba(254, 254, 254, 0.8);
+            font-size: 1rem;
+            font-weight: 300;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .featured-highlights li:hover {
+            color: #d4af37;
+            padding-left: 3rem;
+        }
+
+        .featured-highlights li:last-child {
+            border-bottom: none;
+        }
+
+        .featured-highlights li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .featured-highlights li:hover::before {
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        .featured-model {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 125, 107, 0.05));
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #d4af37;
+            font-style: italic;
+            color: rgba(254, 254, 254, 0.9);
+            font-weight: 300;
+            backdrop-filter: blur(20px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: #0a0a0a;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: #0a0a0a;
+        }
+
+        .contact .section-subtitle {
+            color: rgba(10, 10, 10, 0.8);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-bottom: 5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 3rem;
+            padding: 3rem;
+            background: rgba(10, 10, 10, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(10, 10, 10, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(10, 10, 10, 0.2);
+        }
+
+        .contact-item-header {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .contact-item-content {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+            color: #d4af37;
+            border: 2px solid #0a0a0a;
+        }
+
+        .whatsapp-button:hover {
+            background: transparent;
+            color: #0a0a0a;
+            border-color: #0a0a0a;
+            box-shadow: 0 15px 40px rgba(10, 10, 10, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #fefefe;
+            text-align: center;
+            padding: 5rem 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            color: rgba(254, 254, 254, 0.7);
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 150px 0 100px;
+                min-height: 90vh;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 6px;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-grid,
+            .services-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 100px 0;
+            }
+
+            .service-card,
+            .featured-body {
+                padding: 3rem;
+            }
+
+            .featured-header {
+                padding: 3rem;
+            }
+
+            .hero-logo {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 1;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="container">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <img src="logo_kaleixo_sb1.png" alt="Kaleixo Logo">
+                </div>
+                <div class="logo">Kaleixo</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#projetos-destaque">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content loading">
+                <div class="hero-logo">
+                    <img src="logo_kaleixo_sb.png" alt="Kaleixo Logo">
+                </div>
+                <div class="hero-subtitle">Tecnologias Emergentes</div>
+                <h1>O Futuro é Agora</h1>
+                <p>Revolucionamos indústrias através de IA de última geração. Transformamos dados em decisões estratégicas que moldam o amanhã do agronegócio e saúde pública.</p>
+                <div class="cta-buttons">
+                    <a href="#projetos-destaque" class="cta-button">Descobrir Soluções</a>
+                    <a href="#contato" class="cta-button cta-secondary">Iniciar Projeto</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2 class="section-title reveal">Redefinindo Possibilidades</h2>
+            <p class="section-subtitle reveal">Onde ciência de dados encontra inovação disruptiva para criar o impossível</p>
+            
+            <div class="about-grid">
+                <div class="about-content reveal">
+                    <h3>Excelência Tecnológica</h3>
+                    <p>Na Kaleixo, não seguimos tendências - criamos o futuro. Nossa expertise em IA generativa e biotecnologia computacional nos posiciona na vanguarda da transformação digital.</p>
+                    <p>Desenvolvemos soluções que não apenas resolvem problemas complexos, mas redefinem indústrias inteiras através de inovação disruptiva e visão estratégica incomparável.</p>
+                </div>
+                <div class="about-stats reveal">
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Possibilidades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">AI</span>
+                        <span class="stat-label">Core Technology</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Setores Revolucionados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Disrupção</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="services">
+        <div class="container">
+            <h2 class="section-title reveal">Domínios de Excelência</h2>
+            <p class="section-subtitle reveal">Especializações estratégicas onde lideramos a revolução tecnológica mundial</p>
+            
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-header">
+                        <div class="service-icon agro-icon">🧬</div>
+                        <h3>Biotech Intelligence</h3>
+                    </div>
+                    <p>Aceleramos a descoberta de biodefensivos em 1000x através de IA molecular avançada, redefinindo agricultura sustentável globalmente.</p>
+                    <ul class="service-features">
+                        <li>Predição Molecular Quântica</li>
+                        <li>IA Generativa para Biológicos</li>
+                        <li>Simulação Climática Avançada</li>
+                        <li>Otimização para Trópicos</li>
+                        <li>Biotecnologia Computacional</li>
+                        <li>Drug Discovery 4.0</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-header">
+                        <div class="service-icon health-icon">🔬</div>
+                        <h3>Health Intelligence</h3>
+                    </div>
+                    <p>Revolucionamos vigilância epidemiológica através de automação inteligente, transformando saúde pública em tempo real.</p>
+                    <ul class="service-features">
+                        <li>IA Epidemiológica Preditiva</li>
+                        <li>Automação Cognitiva Completa</li>
+                        <li>Analytics em Tempo Real</li>
+                        <li>Geointeligência Avançada</li>
+                        <li>Machine Learning Clínico</li>
+                        <li>Digital Health Revolution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projetos-destaque" class="featured-projects">
+        <div class="container">
+            <h2 class="section-title reveal">Inovações Disruptivas</h2>
+            <p class="section-subtitle reveal">Produtos que não apenas lideram mercados, mas criam categorias inteiramente novas</p>
+            
+            <div class="featured-grid">
+                <div class="featured-card reveal">
+                    <div class="featured-header">
+                        <h4>BioShield AI</h4>
+                        <p>A revolução definitiva em descoberta de biodefensivos através de superinteligência artificial</p>
+                    </div>
+                    <div class="featured-body">
+                        <h5>Missão Impossível</h5>
+                        <p>Comprimir décadas de pesquisa em meses através de IA quântica molecular, democratizando biodefensivos para combater pragas tropicais devastadoras.</p>
+                        
+                        <h5>Arsenal Tecnológico</h5>
+                        <ul class="featured-highlights">
+                            <li>QuantumFold: Predição molecular em femtossegundos</li>
+                            <li>BioGenesis: IA gerativa para compostos únicos</li>
+                            <li>TropiCore: Engine otimizada para clima brasileiro</li>
+                            <li>MegaScreen: Triagem virtual de bilhões de compostos</li>
+                            <li>PredictField: Simulação hiperrealista de eficácia</li>
+                        </ul>
+                        <div class="featured-model">Licenciamento SaaS para gigantes globais do agronegócio - receita recorrente de 8 dígitos.</div>
+                    </div>
+                </div>
+
+                <div class="featured-card reveal">
+                    <div class="featured-header">
+                        <h4>MAX Control</h4>
+                        <p>Superinteligência aplicada ao controle epidemiológico do século XXI</p>
+                    </div>
+                    <div class="featured-body">
+                        <h5>Visão Revolucionária</h5>
+                        <p>Automatizar completamente vigilância epidemiológica através de IA cognitiva, eliminando latência humana e multiplicando eficácia por 100x.</p>
+                        
+                        <h5>Superpoderes Digitais</h5>
+                        <ul class="featured-highlights">
+                            <li>VisionOCR: Reconhecimento 99.9% preciso instantâneo</li>
+                            <li>PredictOutbreak: IA preditiva para surtos futuros</li>
+                            <li>RealTimeSync: Sincronização nacional automática</li>
+                            <li>GeoIntel: Mapeamento inteligente multimodal</li>
+                            <li>AutoReports: Relatórios executivos autônomos</li>
+                        </ul>
+                        <div class="featured-model">Contratos municipais recorrentes - expansão para milhares de cidades brasileiras.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Vamos Revolucionar Juntos</h2>
+            <p class="section-subtitle reveal">Pronto para liderar a próxima revolução tecnológica em sua indústria?</p>
+            
+            <div class="contact-content reveal">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-item-header">Conexão Direta</div>
+                        <div class="contact-item-content">+55 65 99292-5252</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-item-header">Centro de Inovação</div>
+                        <div class="contact-item-content">Cuiabá, Mato Grosso</div>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/5565992925252?text=Olá! Quero revolucionar minha indústria com as soluções disruptivas da Kaleixo." 
+                   target="_blank" 
+                   class="cta-button whatsapp-button">
+                   Iniciar Contato
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Kaleixo — Tecnologias Emergentes</p>
+            <p>Criando o impossível através da inovação disruptiva</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Header scroll effect
+        function handleScroll() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        // Reveal animations
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Smooth scrolling
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initSmoothScrolling();
+            revealElements();
+            
+            window.addEventListener('scroll', () => {
+                handleScroll();
+                revealElements();
+            });
+        });
+
+        // Performance optimization
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    handleScroll();
+                    revealElements();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+    </script>
+</body>
+</html>
