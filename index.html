@@ -164,6 +164,36 @@
             width: 100%;
         }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--gold-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 50%, var(--dark-tertiary) 100%);
@@ -1182,76 +1212,453 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 32px;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+                letter-spacing: 6px;
+            }
+
+            .section-title {
+                font-size: 2.8rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
             }
 
             .solutions-grid {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
             .testimonials-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.5rem;
+            }
+
+            .about-grid {
+                gap: 5rem;
+            }
+
+            .differentials-grid {
+                gap: 4rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 5px;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 120px 0;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .container {
+                padding: 0 20px;
             }
 
+            /* Mobile Menu */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(28, 28, 28, 0.95) 100%);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                padding: 100px 30px 30px;
+                gap: 2rem;
+                border-left: 1px solid rgba(212, 175, 55, 0.2);
+                transition: right 0.4s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(30px);
+                animation: slideInNav 0.4s ease forwards;
+            }
+
+            .nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { animation-delay: 0.15s; }
+            .nav-links.active li:nth-child(3) { animation-delay: 0.2s; }
+            .nav-links.active li:nth-child(4) { animation-delay: 0.25s; }
+            .nav-links.active li:nth-child(5) { animation-delay: 0.3s; }
+
+            @keyframes slideInNav {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 12px 0;
+                display: block;
+            }
+
+            /* Logo adjustments */
+            .logo {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            /* Hero Section */
             .hero {
-                padding: 150px 0 100px;
-                min-height: 90vh;
+                padding: 140px 0 80px;
+                min-height: auto;
+            }
+
+            .hero-logo {
+                width: 90px;
+                height: 90px;
+                margin-bottom: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+                margin-bottom: 1.5rem;
             }
 
             .hero h1 {
-                font-size: 3rem;
-                letter-spacing: 4px;
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
             }
 
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                margin-bottom: 2.5rem;
+                padding: 0 10px;
             }
 
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
+                align-items: stretch;
+                gap: 1rem;
+                padding: 0 10px;
             }
 
-            .benefits-grid,
-            .about-grid,
-            .differentials-grid,
-            .about-stats {
+            .cta-button {
+                padding: 16px 32px;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            /* Sections */
+            section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 4rem;
+                padding: 0 10px;
+            }
+
+            /* Benefits Grid */
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .benefit-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .benefit-icon svg {
+                width: 42px;
+                height: 42px;
+            }
+
+            .benefit-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .benefit-card p {
+                font-size: 0.95rem;
+            }
+
+            /* Differentials */
+            .differentials-grid {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
 
-            section {
-                padding: 100px 0;
+            .service-item {
+                padding: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
             }
 
-            .solution-card,
-            .portfolio-body {
-                padding: 3rem;
+            .service-item:hover {
+                transform: translateY(-5px);
+            }
+
+            .service-item-icon svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .diagnostic-feature {
+                padding: 3rem 2rem;
+            }
+
+            .diagnostic-feature h3 {
+                font-size: 1.6rem;
+            }
+
+            .diagnostic-list li {
+                font-size: 0.95rem;
+            }
+
+            /* About Section */
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .about-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-content p {
+                font-size: 1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                padding: 2rem 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            /* Solutions */
+            .solutions-grid {
+                gap: 2.5rem;
+            }
+
+            .solution-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .solution-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .solution-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .solution-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .solution-features li {
+                font-size: 0.9rem;
+                padding: 0.8rem 0;
+            }
+
+            /* Portfolio */
+            .portfolio-grid {
+                gap: 3rem;
             }
 
             .portfolio-header {
-                padding: 3rem;
+                padding: 2.5rem 2rem;
             }
 
-            .hero-logo {
-                width: 80px;
-                height: 80px;
+            .portfolio-header h4 {
+                font-size: 1.6rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .portfolio-header p {
+                font-size: 0.95rem;
+            }
+
+            .portfolio-body {
+                padding: 2.5rem 2rem;
+            }
+
+            .portfolio-body h5 {
+                font-size: 1.1rem;
+            }
+
+            .portfolio-body p {
+                font-size: 0.95rem;
+            }
+
+            .portfolio-highlights li {
+                font-size: 0.9rem;
+            }
+
+            /* Testimonials */
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonial-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .testimonial-quote {
+                font-size: 0.95rem;
+            }
+
+            /* Contact Form */
+            .lead-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.9rem 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .form-submit {
+                padding: 1rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .trust-signals {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .trust-signal {
+                font-size: 0.85rem;
+            }
+
+            .alternative-contact {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding-top: 2rem;
+            }
+
+            .contact-method p {
+                font-size: 1rem;
+            }
+
+            /* Footer */
+            footer {
+                padding: 3rem 0;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 1.7rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .benefit-card,
+            .solution-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .diagnostic-feature {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .stat-item {
+                padding: 1.5rem 1rem;
+            }
+
+            .portfolio-header,
+            .portfolio-body {
+                padding: 2rem 1.5rem;
             }
 
             .lead-form {
-                padding: 2.5rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .cta-button {
+                padding: 14px 24px;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -1269,7 +1676,12 @@
                 </div>
                 <div class="logo">Kaleixo</div>
             </div>
-            <ul class="nav-links">
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#beneficios">Benefícios</a></li>
                 <li><a href="#solucoes">Soluções</a></li>
                 <li><a href="#portfolio">Portfólio</a></li>
@@ -1876,6 +2288,38 @@
             });
         }
 
+        // Mobile menu toggle
+        function initMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (mobileMenuToggle && navLinks) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                });
+
+                // Close menu when clicking on a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                        mobileMenuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        }
+
         // Smooth scrolling
         function initSmoothScrolling() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1895,6 +2339,7 @@
         // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
             initDottedSurface();
+            initMobileMenu();
             initSmoothScrolling();
             revealElements();
 
